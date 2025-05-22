@@ -1,0 +1,24 @@
+[
+  {
+    "request": "update-screen",
+    "data": {
+      "device_id": 923,
+      "sensor_order": [
+        "T",
+        "L",
+        "H",
+        "P"
+      ]
+    }
+  },
+  {
+    "request": "get-devices",
+    "data": {}
+  },
+  {
+    "request": "get-values",
+    "data": {
+      "device_id": 923
+    }
+  }
+]
