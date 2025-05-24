@@ -55,28 +55,6 @@ Il permet de tester toutes les fonctionnalités de l'application **sans serveur 
 
 ---
 
-## Build & Exécution
-
-- Android Studio (version 2023+ recommandée)
-- Minimum SDK : 24
-- Compatible avec téléphone physique ou simulateur
-- Ajoutez la permission suivante dans le `AndroidManifest.xml` :
-
-```xml
-<uses-permission android:name="android.permission.INTERNET"/>
-```
-
-Lancer l’application
-Clonez le dépôt :
-```bash
-git clone https://github.com/<votre-utilisateur>/<votre-repo>.git
-```
-Ouvrez le projet dans Android Studio
-
-Connectez un appareil ou démarrez un simulateur
-
-Cliquez sur Run
-
 Projet réalisé à CPE Lyon – 3IRC
 
 Ce projet est destiné à un usage pédagogique.
