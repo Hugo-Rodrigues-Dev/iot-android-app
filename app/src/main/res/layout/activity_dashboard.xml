@@ -48,7 +48,6 @@
                 android:textSize="18sp" />
         </LinearLayout>
 
-        <!-- Colonne droite (Pression + Luminosité) -->
         <LinearLayout
             android:id="@+id/values_box_right"
             android:layout_width="0dp"

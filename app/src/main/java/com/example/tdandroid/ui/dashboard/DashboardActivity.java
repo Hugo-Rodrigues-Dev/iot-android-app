@@ -3,7 +3,6 @@ package com.example.tdandroid.ui.dashboard;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
