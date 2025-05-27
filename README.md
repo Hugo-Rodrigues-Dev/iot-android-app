@@ -81,3 +81,8 @@ Il permet de tester toutes les fonctionnalités de l'application **sans serveur 
 Projet réalisé à CPE Lyon – 3IRC
 
 Ce projet est destiné à un usage pédagogique.
+
+---
+
+![Java](https://img.shields.io/badge/Language-Java-blue)
+![License: MIT](https://img.shields.io/badge/License-MIT-green)
