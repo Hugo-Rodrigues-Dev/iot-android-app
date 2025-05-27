@@ -47,11 +47,21 @@ Il permet de tester toutes les fonctionnalités de l'application **sans serveur 
 
 ## Technologies utilisées
 
-- Java (Android SDK)
-- MPAndroidChart
-- RecyclerView (avec drag & drop)
-- Communication réseau : UDP
-- Architecture MVC simple, avec séparation des responsabilités
+- **Language** : Java  
+- **UI** : Android SDK
+- **Networking** : UDP sockets
+- **Charts** : MPAndroidChart  
+- **Data binding** : RecyclerView  
+- **Architecture** : Modular & commented code (SOLID-friendly)
+
+---
+
+🚀 Setup
+1. Clone the repo
+
+2. Open in Android Studio
+
+3. Run on emulator or device
 
 ---
 
