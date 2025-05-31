@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.constraintlayout)
 
     testImplementation(libs.junit)
+    testImplementation("org.json:json:20230227")
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
