@@ -3,7 +3,7 @@
 ## Objectif
 
 Cette application Android a été développée dans le cadre du projet "Développement embarqué et IoT" à CPE Lyon.  
-Elle permet de se connecter à un serveur IoT, de sélectionner un objet connecté (micro:bit), et d'afficher en temps réel les données de ses capteurs (température, humidité, pression, luminosité), avec la possibilité de personnaliser l'ordre d'affichage.
+Elle permet de se connecter à un serveur IoT, de sélectionner un objet connecté (micro:bit), et d'afficher en temps réel les données de ses capteurs (température, humidité, pression, luminosité), avec la possibilité de personnaliser l'ordre d'affichage sur l'écran.
 
 ---
 
@@ -47,14 +47,42 @@ Il permet de tester toutes les fonctionnalités de l'application **sans serveur 
 
 ## Technologies utilisées
 
-- Java (Android SDK)
-- MPAndroidChart
-- RecyclerView (avec drag & drop)
-- Communication réseau : UDP
-- Architecture MVC simple, avec séparation des responsabilités
+- **Language** : Java  
+- **UI** : Android SDK
+- **Networking** : UDP sockets
+- **Charts** : MPAndroidChart  
+- **Data binding** : RecyclerView  
+- **Architecture** : Modular & commented code (SOLID-friendly)
+
+---
+
+## Screenshots
+## Choix du serveur et micro:bits : 
+![image](https://github.com/user-attachments/assets/dee7d0aa-8c0c-4647-a296-f3d0eb7b3e2c)
+![image](https://github.com/user-attachments/assets/4a3cfe42-56ea-4c65-8e68-7caab9c156cf)
+
+## Visualisation des données et choix de l'ordre d'affichage :
+![image](https://github.com/user-attachments/assets/d084cc13-58dd-4fa7-937f-bfe0b5f6128f)
+![image](https://github.com/user-attachments/assets/e3500e9b-676f-4eb0-9d93-fc6b14d82ba8)
+
+
+
+---
+
+🚀 Setup
+1. Clone the repo
+
+2. Open in Android Studio
+
+3. Run on emulator or device
 
 ---
 
 Projet réalisé à CPE Lyon – 3IRC
 
 Ce projet est destiné à un usage pédagogique.
+
+---
+
+![Java](https://img.shields.io/badge/Language-Java-blue)
+![License: MIT](https://img.shields.io/badge/License-MIT-green)
