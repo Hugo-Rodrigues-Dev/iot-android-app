@@ -44,7 +44,7 @@ public class DashboardActivity extends AppCompatActivity {
     private Runnable pollingTask;
 
     private SensorOrderAdapter adapter;
-    private TextView tempView, humView, pressView, lumView;
+    private TextView tempView, humView, pressView, lumView, deviceNameView;
 
     private final List<String> sensors = new ArrayList<>(Arrays.asList("Température", "Luminosité", "Humidité", "Pression"));
 
@@ -72,7 +72,10 @@ public class DashboardActivity extends AppCompatActivity {
         humView = findViewById(R.id.TextsBox_Hum);
         pressView = findViewById(R.id.TextsBox_Press);
         lumView = findViewById(R.id.LightSensorBox_value);
+        deviceNameView = findViewById(R.id.device_name_text);
+        deviceNameView.setText(deviceId);
         chart = findViewById(R.id.chart_temp);
+
 
         // Initialisation des capteurs dans le RecyclerView
         RecyclerView recyclerView = findViewById(R.id.sensor_order_list);
@@ -88,8 +91,7 @@ public class DashboardActivity extends AppCompatActivity {
                 Collections.swap(sensors, from.getAdapterPosition(), to.getAdapterPosition());
                 adapter.notifyItemMoved(from.getAdapterPosition(), to.getAdapterPosition());
 
-                // Réinitialise le graphe pour suivre le premier capteur
-                resetGraphForNewSensor();
+                maybeResetGraphAfterReorder();
                 return true;
             }
 
@@ -168,6 +170,17 @@ public class DashboardActivity extends AppCompatActivity {
         chart.getAxisLeft().setTextColor(getResources().getColor(android.R.color.white));
         chart.getAxisRight().setTextColor(getResources().getColor(android.R.color.white));
 
+        chart.getDescription().setEnabled(true);
+        chart.getDescription().setText("Temps (s)");
+        chart.getDescription().setTextColor(getResources().getColor(android.R.color.white));
+        chart.getDescription().setTextSize(12f);
+
+        // Déplacement en bas à droite (x = +large, y = +bas)
+        chart.post(() -> {
+            chart.getDescription().setPosition(chart.getWidth() - 100f, chart.getHeight() - 5f);
+            chart.invalidate();  // Redessine après placement
+        });
+
         chart.invalidate();
     }
 
@@ -232,6 +245,16 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     /**
+     * Retiens le capteur en première position et permet de gérer l'ordre des autres sans influer sur l'affichage du graphe.
+     */
+    private void maybeResetGraphAfterReorder() {
+        String newFirst = adapter.getCurrentOrder().get(0);
+        if (!newFirst.equals(currentDisplayedSensor)) {
+            resetGraphForNewSensor();
+        }
+    }
+
+    /**
      * Met à jour les champs de texte + graphe (uniquement pour le 1er capteur)
      */
     private void updateSensorViews(JSONObject data) {
@@ -273,7 +296,8 @@ public class DashboardActivity extends AppCompatActivity {
 
             try {
                 float val = Float.parseFloat(value);
-                chartEntries.add(new Entry(timeIndex++, val));
+                chartEntries.add(new Entry(timeIndex * 5, val));  // chaque tick = 5 secondes
+                timeIndex++;
                 if (chartEntries.size() > 20) chartEntries.removeFirst();
 
                 chartDataSet.setValues(chartEntries);

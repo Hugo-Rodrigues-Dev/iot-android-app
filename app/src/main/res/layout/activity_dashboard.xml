@@ -9,6 +9,20 @@
     tools:context=".ui.dashboard.DashboardActivity">
 
     <!-- Conteneur horizontal pour afficher les valeurs capteurs en 2 colonnes -->
+    <TextView
+        android:id="@+id/device_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Device : —"
+        android:textColor="@color/cpe_blue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/values_container"
         android:layout_width="0dp"
