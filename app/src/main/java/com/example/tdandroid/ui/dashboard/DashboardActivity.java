@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,7 +23,6 @@ import java.util.*;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -40,11 +40,14 @@ public class DashboardActivity extends AppCompatActivity {
     private String deviceId;
     private boolean isDemo = false;
 
-    private Handler handler = new Handler(Looper.getMainLooper());
+    private final Handler handler = new Handler(Looper.getMainLooper());
     private Runnable pollingTask;
 
     private SensorOrderAdapter adapter;
-    private TextView tempView, humView, pressView, lumView, deviceNameView;
+    private TextView tempView;
+    private TextView humView;
+    private TextView pressView;
+    private TextView lumView;
 
     private final List<String> sensors = new ArrayList<>(Arrays.asList("Température", "Luminosité", "Humidité", "Pression"));
 
@@ -52,7 +55,7 @@ public class DashboardActivity extends AppCompatActivity {
     private LineChart chart;
     private LineDataSet chartDataSet;
     private LineData chartLineData;
-    private LinkedList<Entry> chartEntries = new LinkedList<>();
+    private final LinkedList<Entry> chartEntries = new LinkedList<>();
     private int timeIndex = 0;
     private String currentDisplayedSensor = "Température"; // Par défaut
 
@@ -72,7 +75,7 @@ public class DashboardActivity extends AppCompatActivity {
         humView = findViewById(R.id.TextsBox_Hum);
         pressView = findViewById(R.id.TextsBox_Press);
         lumView = findViewById(R.id.LightSensorBox_value);
-        deviceNameView = findViewById(R.id.device_name_text);
+        TextView deviceNameView = findViewById(R.id.device_name_text);
         deviceNameView.setText(deviceId);
         chart = findViewById(R.id.chart_temp);
 
@@ -87,7 +90,7 @@ public class DashboardActivity extends AppCompatActivity {
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0) {
             @Override
-            public boolean onMove(RecyclerView rv, RecyclerView.ViewHolder from, RecyclerView.ViewHolder to) {
+            public boolean onMove(@NonNull RecyclerView rv, @NonNull RecyclerView.ViewHolder from, @NonNull RecyclerView.ViewHolder to) {
                 Collections.swap(sensors, from.getAdapterPosition(), to.getAdapterPosition());
                 adapter.notifyItemMoved(from.getAdapterPosition(), to.getAdapterPosition());
 
@@ -96,7 +99,7 @@ public class DashboardActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {}
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {}
         });
         helper.attachToRecyclerView(recyclerView);
 
@@ -147,6 +150,13 @@ public class DashboardActivity extends AppCompatActivity {
 
         // Bouton retour
         findViewById(R.id.btn_back).setOnClickListener(v -> finish());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Stoppe les mises à jour périodiques pour éviter les fuites de mémoire
+        handler.removeCallbacks(pollingTask);
     }
 
     /**
