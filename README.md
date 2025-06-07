@@ -70,11 +70,11 @@ Il permet de tester toutes les fonctionnalités de l'application **sans serveur 
 ---
 
 🚀 Setup
-1. Clone the repo
+1. Clonez le repo
 
-2. Open in Android Studio
+2. Ouvrez le dans Android Studio
 
-3. Run on emulator or device
+3. Lancez l'application sur emulator ou votre téléphone
 
 ---
 
